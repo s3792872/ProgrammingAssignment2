@@ -13,7 +13,9 @@ public class Enemy {
 	private BufferedImage imageCurrent;
 	private BufferedImage imageRunning;
 	private BufferedImage imageOver;
-	private int stepSize;
+	private int followX;
+	private int followY;
+	private GameManager gameManager;
 
 	public Enemy(GameManager gameManager, int x, int y) {
 		try {
@@ -24,19 +26,38 @@ public class Enemy {
 		}
 		this.x = x;
 		this.y = y;
-		this.stepSize = 5;
+		this.followX = 0;
+		this.followY = 0;
+		this.gameManager = gameManager;
 
 		this.imageCurrent = this.imageRunning;
 		return;
 	}
 
 	public void performAction() {
-		
+		// gets the players x and y coords from the gamemanager class then compares it
+		// with enemy x and y coords
+		// and moves the enemy accordingly
+		if (this.gameManager.getPlayer().getX() > this.x) {
+			this.followX = 5;
+			this.x = this.x + this.followX;
+		} else if (this.gameManager.getPlayer().getX() < this.x) {
+			this.followX = -5;
+			this.x = this.x + this.followX;
+		}
+		if (this.gameManager.getPlayer().getY() > this.y) {
+			this.followY = 5;
+			this.y = this.y + this.followY;
+		} else if (this.gameManager.getPlayer().getY() < this.y) {
+			this.followY = -5;
+			this.y = this.y + this.followY;
+		}
+
 	}
 
 	public void die() {
 		this.imageCurrent = this.imageOver;
-	    return;
+		return;
 
 	}
 

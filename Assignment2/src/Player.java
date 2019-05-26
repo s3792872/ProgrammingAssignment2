@@ -33,9 +33,10 @@ public class Player {
 	}
 
 	public void performAction() {
-		 this.x = x + this.stepSizex;
-		 this.y = y + this.stepSizey;
-		 return;
+		//moves the player accordingly to stepsize variables
+		this.x += this.stepSizex;
+		this.y += this.stepSizey;
+		return;
 
 	}
 
@@ -57,17 +58,35 @@ public class Player {
 	}
 
 	public void setKey(char c, boolean b) {
-		if (c == KeyEvent.VK_LEFT) {
-			c = 'L';
-		}
-		if (c == KeyEvent.VK_RIGHT) {
-			c = 'R';
-		}
-		if (c == KeyEvent.VK_UP) {
-			c = 'U';
-		}
-		if (c == KeyEvent.VK_DOWN) {
-			c = 'D';
+		// checks to see if a key is being pressed or not, if a key is being pressed
+		// sets the stepSize variables to appropriate ints, if a key is not pressed
+		// (or released again) the stepSize variables are set back to 0
+		if (b == true) {
+			if (c == 'R') {
+				this.stepSizex = 15;
+			}
+			if (c == 'L') {
+				this.stepSizex = -15;
+			}
+			if (c == 'U') {
+				this.stepSizey = -15;
+			}
+			if (c == 'D') {
+				this.stepSizey = 15;
+			}
+		} else if (b == false) {
+			if (c == 'R') {
+				this.stepSizex = 0;
+			}
+			if (c == 'L') {
+				this.stepSizex = 0;
+			}
+			if (c == 'U') {
+				this.stepSizey = 0;
+			}
+			if (c == 'D') {
+				this.stepSizey = 0;
+			}
 		}
 		return;
 
